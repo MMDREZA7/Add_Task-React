@@ -18,7 +18,7 @@ const Header = ({ btnTitle, onAdd, showAdd }) => {
       <h1>Task Tracker</h1>
 
       <Button
-        text={showAdd ? "Close" : "ADD TASK"}
+        text={showAdd ? "Close" : btnTitle}
         color={showAdd ? "red" : "green"}
         onClick={onAdd}
       />
@@ -30,7 +30,7 @@ const Header = ({ btnTitle, onAdd, showAdd }) => {
 };
 
 Header.propTypes = {
-  title: propTypes.string.isRequired,
+  btnTitle: propTypes.string.isRequired,
 };
 
 export default Header;

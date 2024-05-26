@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import Footer from "./components/footer/Footer";
+import About from "./components/about/About";
+import Contacts from "./components/contacts/Contacts";
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -74,25 +78,35 @@ function App() {
   };
 
   return (
-    <div className="body">
-      <div className="container">
-        <Header
-          btnTitle="ADD TASK"
-          onAdd={() => setShowAddTask(!showAddTask)}
-          showAdd={showAddTask}
-        />
-        {showAddTask && <AddTask onAdd={addTask} />}
-        {tasks.length > 0 ? (
-          <Tasks
-            tasks={tasks}
-            onDelete={deleteTask}
-            onToggle={toggleReminder}
+    <Router>
+      <div className="body">
+        <div className="container">
+          <Header
+            btnTitle="ADD TASK"
+            onAdd={() => setShowAddTask(!showAddTask)}
+            showAdd={showAddTask}
           />
-        ) : (
-          <h3>✔ No Task To Show ✔</h3>
-        )}
+
+          {showAddTask && <AddTask onAdd={addTask} />}
+          {tasks.length > 0 ? (
+            <Tasks
+              tasks={tasks}
+              onDelete={deleteTask}
+              onToggle={toggleReminder}
+            />
+          ) : (
+            <h3>✔ No Task To Show ✔</h3>
+          )}
+
+          <Routes>
+            <Route path="/about" Component={About} />
+            <Route path="contacts" Component={Contacts} />
+          </Routes>
+
+          <Footer />
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
